@@ -1,0 +1,106 @@
+{
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"backgroundimage" : 
+			{
+				"index" : 0,
+				"order" : 100,
+				"text" : "Background Image",
+				"type" : "file",
+				"value" : ""
+			},
+			"clockformat" : 
+			{
+				"condition" : "clockvisibility.value == true",
+				"index" : 2,
+				"options" : 
+				[
+					{
+						"label" : "12 Hour",
+						"value" : "12"
+					},
+					{
+						"label" : "24 Hour",
+						"value" : "24"
+					}
+				],
+				"order" : 102,
+				"text" : "Clock Format",
+				"type" : "combo",
+				"value" : "12"
+			},
+			"clockvisibility" : 
+			{
+				"index" : 1,
+				"order" : 101,
+				"text" : "Clock Visibility",
+				"type" : "bool",
+				"value" : true
+			},
+			"clockxlocation" : 
+			{
+				"condition" : "clockvisibility.value == true",
+				"fraction" : false,
+				"index" : 7,
+				"max" : 7680,
+				"min" : 0,
+				"order" : 107,
+				"text" : "Clock X Location",
+				"type" : "slider",
+				"value" : 100
+			},
+			"clockylocation" : 
+			{
+				"condition" : "clockvisibility.value == true",
+				"fraction" : false,
+				"index" : 6,
+				"max" : 4320,
+				"min" : 0,
+				"order" : 106,
+				"text" : "Clock Y Location",
+				"type" : "slider",
+				"value" : 100
+			},
+			"hourscolor" : 
+			{
+				"condition" : "clockvisibility.value == true",
+				"index" : 5,
+				"order" : 105,
+				"text" : "Hours Color",
+				"type" : "color",
+				"value" : "0.9490196078431372 0.16470588235294117 0.6235294117647059"
+			},
+			"minutescolor" : 
+			{
+				"condition" : "clockvisibility.value == true",
+				"index" : 4,
+				"order" : 104,
+				"text" : "Minutes Color",
+				"type" : "color",
+				"value" : "0.11372549019607843 0.7372549019607844 0.3411764705882353"
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"secondscolor" : 
+			{
+				"condition" : "clockvisibility.value == true",
+				"index" : 3,
+				"order" : 103,
+				"text" : "Seconds Color",
+				"type" : "color",
+				"value" : "0.11764705882352941 0.29411764705882354 0.7607843137254902"
+			}
+		}
+	},
+	"title" : "index",
+	"type" : "web",
+	"version" : 0
+}

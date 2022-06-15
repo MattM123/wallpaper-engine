@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+     <head>
+          <meta charset="UTF-8"> 
+          <script src="properties.js"></script>
+          <script src="clockRefresh.js"></script>
+          <script src="visualizer.js"></script>
+          
+          <link href='https://fonts.googleapis.com/css?family=DM Mono' rel='stylesheet'>
+          <link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
+      
+          <style>
+               #time-panel {   
+                    position: absolute;         
+               }
+               #hour, #min, #sec {
+                    font-family: 'dm mono';
+                    font-weight: 1000;                 
+               }
+               #clock {
+                    display: table;
+                    margin: 0 auto;;
+               }
+               #audioCanvas {
+                    border: solid;
+                    height: 500px; 
+                    width: 500px;
+               }
+          </style>
+          
+     </head>
+     <body onload="clock()" > 
+          <div id="time-panel">
+               <canvas id="canvas"></canvas>
+               <span id="clock">
+                    <span id="hour"></span>
+                    <span id="min"></span>
+                    <span id="sec"></span>
+               </span>
+          </div>
+          <canvas id="audioCanvas">
+
+          </canvas>
+          
+     </body>
+</html>
+   
