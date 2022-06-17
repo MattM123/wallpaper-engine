@@ -20,8 +20,8 @@ var overlay = function() {
 
      var secondSecondX = (document.getElementById("sec").getBoundingClientRect().width / 6) * (13.3);
      var firstSecondX = (document.getElementById("sec").getBoundingClientRect().width / 6) * (11);
-     var secondMinuteX = (document.getElementById("min").getBoundingClientRect().width / 6) * (8.7);
-     var firstMinuteX = (document.getElementById("min").getBoundingClientRect().width / 6) * (6.4);
+     var secondMinuteX = (document.getElementById("min").getBoundingClientRect().width / 6) * (8.5);
+     var firstMinuteX = (document.getElementById("min").getBoundingClientRect().width / 6) * (6.2);
      var secondHourX = (document.getElementById("hour").getBoundingClientRect().width / 6) * (3.8);
      var firstHourX = (document.getElementById("hour").getBoundingClientRect().width / 6) * (1.4);
 

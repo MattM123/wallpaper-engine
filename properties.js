@@ -27,8 +27,8 @@ window.wallpaperPropertyListener = {
       if (checkVal == true) {
         document.getElementById("time-panel").style.visibility = "visible";
         document.getElementById("time-panel").style.width = (document.body.clientWidth / 5) + "px";
-        document.getElementById("time-panel").style.height = (document.body.clientWidth / 5) - (document.body.clientWidth / 5 / 5) + "px";
-      
+        document.getElementById("time-panel").style.height = (document.body.clientWidth / 5) - ((document.body.clientWidth / 5 / 5) * 1.6) + "px";
+    
         document.getElementById("hour").style.fontSize = document.getElementById("time-panel").clientWidth / 7.5 + "px";
         document.getElementById("min").style.fontSize = document.getElementById("time-panel").clientWidth / 7.5 + "px";
         document.getElementById("sec").style.fontSize = document.getElementById("time-panel").clientWidth / 7.5 + "px";
@@ -98,7 +98,6 @@ window.wallpaperPropertyListener = {
       document.getElementById("hour").innerText =  h;
       document.getElementById("min").innerText = m; 
       document.getElementById("sec").innerText = s;
-
     }
 
     //====================================
@@ -166,6 +165,106 @@ window.wallpaperPropertyListener = {
     if (properties.clockylocation) {
       var yloc = properties.clockylocation.value;
       document.getElementById("time-panel").style.top = yloc + "px";
+    }
+
+    //====================================
+    //Audio Visualizer Visibility
+    //====================================
+    if (properties.audiovisualizervisibility) {
+      var checkVal = properties.audiovisualizervisibility.value;
+      if (checkVal == true) {
+        document.getElementById("audioCanvas").style.visibility = "visible";
+      }
+      else {
+        document.getElementById("audioCanvas").style.visibility = "hidden";
+      }
+    }
+
+    //====================================
+    //Audio X Location
+    //====================================
+    if (properties.audioxlocation) {
+      var xloc = properties.audioxlocation.value;
+      document.getElementById("audioCanvas").style.left = xloc + "px";
+    }
+
+    //====================================
+    //Audio Y Location
+    //====================================
+    if (properties.audioylocation) {
+      var yloc = properties.audioylocation.value;
+      document.getElementById("audioCanvas").style.top = yloc + "px";
+    }
+
+    //====================================
+    //Audio Height
+    //====================================
+    if (properties.audioheight) {
+      var yloc = properties.audioheight.value;
+      document.getElementById("audioCanvas").style.height = yloc + "px";
+      sessionStorage.setItem("audio-height", yloc);
+    }
+
+    //====================================
+    //Audio Width
+    //====================================
+    if (properties.audiowidth) {
+      var xloc = properties.audiowidth.value;
+      document.getElementById("audioCanvas").style.width = xloc + "px";
+      sessionStorage.setItem("audio-width", xloc);
+    }
+
+    //====================================
+    //Audio Orientation
+    //====================================
+    if (properties.audioorientation) {
+      var o = properties.audioorientation.value;
+      sessionStorage.setItem('audio-orientation', o);
+    }
+
+    //====================================
+    //Match Height
+    //====================================
+    if (properties.matchheight) {
+      if (properties.matchheight.value == true) {
+        document.getElementById("audioCanvas").style.height = document.getElementById("time-panel").getBoundingClientRect().height + "px";
+      }
+      else {
+        document.getElementById("audioCanvas").style.height = sessionStorage.getItem("audio-height") + "px";
+      }
+    }
+
+    //====================================
+    //Match Width
+    //====================================
+    if (properties.matchwidth) {
+      if (properties.matchwidth.value == true) {
+        document.getElementById("audioCanvas").style.width = document.getElementById("time-panel").getBoundingClientRect().width + "px";
+      }
+      else {
+        document.getElementById("audioCanvas").style.width = sessionStorage.getItem("audio-width") + "px";
+      }
+    }
+
+    //====================================
+    //Bar Height
+    //====================================
+    if (properties.barheight) {
+      sessionStorage.setItem("bar-height", properties.barheight.value);
+    }
+
+    //====================================
+    //Bar Amount
+    //====================================
+    if (properties.baramount) {
+      sessionStorage.setItem("bar-amount", properties.baramount.value);
+    }
+    
+    //====================================
+    //Bar Distortion
+    //====================================
+    if (properties.bardistortion) {
+      sessionStorage.setItem("bar-distortion", properties.bardistortion.value);
     }
   },
 };

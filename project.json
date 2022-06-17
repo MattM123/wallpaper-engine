@@ -4,6 +4,90 @@
 	{
 		"properties" : 
 		{
+			"audioheight" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true && matchheight.value == false",
+				"fraction" : false,
+				"index" : 15,
+				"max" : 5000,
+				"min" : 100,
+				"order" : 115,
+				"text" : "Audio Height",
+				"type" : "slider",
+				"value" : 400
+			},
+			"audioorientation" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true",
+				"index" : 13,
+				"options" : 
+				[
+					{
+						"label" : "Top",
+						"value" : "top"
+					},
+					{
+						"label" : "Bottom",
+						"value" : "bottom"
+					},
+					{
+						"label" : "Left",
+						"value" : "left"
+					},
+					{
+						"label" : "Right",
+						"value" : "right"
+					}
+				],
+				"order" : 113,
+				"text" : "Audio Orientation",
+				"type" : "combo",
+				"value" : "left"
+			},
+			"audiovisualizervisibility" : 
+			{
+				"index" : 10,
+				"order" : 110,
+				"text" : "Audio Visualizer Visibility",
+				"type" : "bool",
+				"value" : true
+			},
+			"audiowidth" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true",
+				"fraction" : false,
+				"index" : 14,
+				"max" : 5000,
+				"min" : 100,
+				"order" : 114,
+				"text" : "Audio Width",
+				"type" : "slider",
+				"value" : 500
+			},
+			"audioxlocation" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true",
+				"fraction" : false,
+				"index" : 11,
+				"max" : 7680,
+				"min" : 0,
+				"order" : 111,
+				"text" : "Audio X Location",
+				"type" : "slider",
+				"value" : 100
+			},
+			"audioylocation" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true",
+				"fraction" : false,
+				"index" : 12,
+				"max" : 4320,
+				"min" : 0,
+				"order" : 112,
+				"text" : "Audio Y Location",
+				"type" : "slider",
+				"value" : 400
+			},
 			"backgroundimage" : 
 			{
 				"index" : 0,
@@ -12,10 +96,50 @@
 				"type" : "file",
 				"value" : ""
 			},
+			"baramount" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true",
+				"fraction" : false,
+				"index" : 17,
+				"max" : 8,
+				"min" : 1,
+				"order" : 117,
+				"text" : "Bar Amount",
+				"type" : "slider",
+				"value" : 2
+			},
+			"bardistortion" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true",
+				"fraction" : true,
+				"index" : 18,
+				"max" : 3,
+				"min" : 1,
+				"order" : 118,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Bar Distortion",
+				"type" : "slider",
+				"value" : 1.2
+			},
+			"barheight" : 
+			{
+				"condition" : "audiovisualizervisibility.value == true",
+				"fraction" : true,
+				"index" : 16,
+				"max" : 20,
+				"min" : 1,
+				"order" : 116,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Bar Height",
+				"type" : "slider",
+				"value" : 10
+			},
 			"clockformat" : 
 			{
 				"condition" : "clockvisibility.value == true",
-				"index" : 2,
+				"index" : 4,
 				"options" : 
 				[
 					{
@@ -27,15 +151,15 @@
 						"value" : "24"
 					}
 				],
-				"order" : 102,
+				"order" : 104,
 				"text" : "Clock Format",
 				"type" : "combo",
 				"value" : "12"
 			},
 			"clockvisibility" : 
 			{
-				"index" : 1,
-				"order" : 101,
+				"index" : 3,
+				"order" : 103,
 				"text" : "Clock Visibility",
 				"type" : "bool",
 				"value" : true
@@ -44,10 +168,10 @@
 			{
 				"condition" : "clockvisibility.value == true",
 				"fraction" : false,
-				"index" : 7,
+				"index" : 8,
 				"max" : 7680,
 				"min" : 0,
-				"order" : 107,
+				"order" : 108,
 				"text" : "Clock X Location",
 				"type" : "slider",
 				"value" : 100
@@ -56,10 +180,10 @@
 			{
 				"condition" : "clockvisibility.value == true",
 				"fraction" : false,
-				"index" : 6,
+				"index" : 9,
 				"max" : 4320,
 				"min" : 0,
-				"order" : 106,
+				"order" : 109,
 				"text" : "Clock Y Location",
 				"type" : "slider",
 				"value" : 100
@@ -67,20 +191,36 @@
 			"hourscolor" : 
 			{
 				"condition" : "clockvisibility.value == true",
-				"index" : 5,
-				"order" : 105,
+				"index" : 7,
+				"order" : 107,
 				"text" : "Hours Color",
 				"type" : "color",
-				"value" : "0.9490196078431372 0.16470588235294117 0.6235294117647059"
+				"value" : "0.4588235294117647 0 0.36470588235294116"
+			},
+			"matchheight" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "Match Height",
+				"type" : "bool",
+				"value" : false
+			},
+			"matchwidth" : 
+			{
+				"index" : 1,
+				"order" : 101,
+				"text" : "Match Width",
+				"type" : "bool",
+				"value" : true
 			},
 			"minutescolor" : 
 			{
 				"condition" : "clockvisibility.value == true",
-				"index" : 4,
-				"order" : 104,
+				"index" : 6,
+				"order" : 106,
 				"text" : "Minutes Color",
 				"type" : "color",
-				"value" : "0.11372549019607843 0.7372549019607844 0.3411764705882353"
+				"value" : "0.592156862745098 0 0.6705882352941176"
 			},
 			"schemecolor" : 
 			{
@@ -92,15 +232,16 @@
 			"secondscolor" : 
 			{
 				"condition" : "clockvisibility.value == true",
-				"index" : 3,
-				"order" : 103,
+				"index" : 5,
+				"order" : 105,
 				"text" : "Seconds Color",
 				"type" : "color",
-				"value" : "0.11764705882352941 0.29411764705882354 0.7607843137254902"
+				"value" : "0.9137254901960784 0 1"
 			}
-		}
+		},
+		"supportsaudioprocessing" : true
 	},
-	"title" : "index",
+	"title" : "Binary Clock + Visualizer",
 	"type" : "web",
 	"version" : 0
 }

@@ -9,8 +9,13 @@ let audioCanvas = document.getElementById('audioCanvas');
 // Get the 2D context of the canvas to draw on it in wallpaperAudioListener
 let audioCanvasCtx = audioCanvas.getContext('2d');
 
+// Setting internal canvas resolution to user screen resolution
+// (CSS canvas size differs from internal canvas size)
+audioCanvas.height = window.innerHeight;
+audioCanvas.width = window.innerWidth;
 
 function wallpaperAudioListener(audioArray) {
+  alert("Test");
     // Clear the canvas and set it to black
     audioCanvasCtx.fillStyle = 'rgb(0,0,0)';
     audioCanvasCtx.fillRect(0, 0, audioCanvas.width, audioCanvas.height);
@@ -38,11 +43,6 @@ function wallpaperAudioListener(audioArray) {
         audioCanvasCtx.fillRect(barWidth * i, audioCanvas.height - height, barWidth, height);
     }
 }
-
-// Setting internal canvas resolution to user screen resolution
-// (CSS canvas size differs from internal canvas size)
-audioCanvas.height = window.innerHeight;
-audioCanvas.width = window.innerWidth;
 
 
 // Register the audio listener provided by Wallpaper Engine.
