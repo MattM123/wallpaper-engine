@@ -16,12 +16,12 @@ function overlay() {
      var hoursColor = sessionStorage.getItem('hours-color');
      var radius = 12;
 
-     var secondHourX = (document.getElementById("hour").getBoundingClientRect().x / 2);
-     var firstHourX = (document.getElementById("hour").getBoundingClientRect().x / 4);
-     var secondMinuteX =  document.getElementById("min").style.left + (canvas.width - document.getElementById("min").style.left) - canvas.width / 2.25;
-     var firstMinuteX = document.getElementById("min").style.left + (canvas.width - document.getElementById("min").style.left) - canvas.width / 1.85;
-     var secondSecondX = document.getElementById("sec").style.left + (canvas.width - document.getElementById("sec").style.left) - canvas.width / 8.5;
-     var firstSecondX = document.getElementById("sec").style.left + (canvas.width - document.getElementById("sec").style.left) - canvas.width / 4.6;
+     var secondHourX = document.getElementById("hour").style.left + (canvas.width - document.getElementById("hour").style.left) - canvas.width / (1 + (1 / 3));
+     var firstHourX = document.getElementById("hour").style.left + (canvas.width - document.getElementById("hour").style.left) - canvas.width / 1.11;
+     var secondMinuteX =  document.getElementById("min").style.left + (canvas.width - document.getElementById("min").style.left) - canvas.width / (2 + (1 / 3));
+     var firstMinuteX = document.getElementById("min").style.left + (canvas.width - document.getElementById("min").style.left) - canvas.width / 1.72;
+     var secondSecondX = document.getElementById("sec").style.left + (canvas.width - document.getElementById("sec").style.left) - canvas.width / 8.55;
+     var firstSecondX = document.getElementById("sec").style.left + (canvas.width - document.getElementById("sec").style.left) - canvas.width / 4;
 
 
      /*==================================================
@@ -808,7 +808,6 @@ function refreshTime() {
      
      sessionStorage.setItem('seconds', s);
      sessionStorage.setItem('minutes', m);
-     sessionStorage.setItem('hours', h);
 }
 function clock() {
      //Used to update clock
@@ -847,7 +846,7 @@ function clock() {
                }   
              }
      }
-
+     sessionStorage.setItem('hours', h);
      document.getElementById("hour").innerText = h;
      document.getElementById("min").innerText = m;
      document.getElementById("sec").innerText = s;

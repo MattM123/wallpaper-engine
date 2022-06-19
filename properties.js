@@ -35,10 +35,6 @@ window.wallpaperPropertyListener = {
   
         sessionStorage.setItem('time-panel-width', document.getElementById("time-panel").style.width);
         sessionStorage.setItem('time-panel-height', document.getElementById("time-panel").style.height);
-  
-       // document.getElementById("hour").style.wordSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
-       // document.getElementById("min").style.wordSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
-      //  document.getElementById("sec").style.wordSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
     
         //setting up canvas
         document.getElementById("canvas").style.width = document.getElementById("time-panel").style.width;
@@ -265,6 +261,23 @@ window.wallpaperPropertyListener = {
     //====================================
     if (properties.bardistortion) {
       sessionStorage.setItem("bar-distortion", properties.bardistortion.value);
+    }
+
+    //====================================
+    //Audio Color
+    //====================================
+    if (properties.audiocolor) {
+      clearOverlay();
+
+      // Convert the custom color to 0 - 255 range for CSS usage
+      var customColor = properties.audiocolor.value.split(' ');
+      customColor = customColor.map(function(c) {
+        return Math.ceil(c * 255);
+      });
+      var color = 'rgb(' + customColor + ')'; 
+      sessionStorage.setItem('audio-color', color);
+      
+     // document.getElementById("min").style.color = color;
     }
   },
 };
