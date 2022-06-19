@@ -4,13 +4,11 @@ var clearOverlay = function() {
      canvas.style.height = sessionStorage.getItem('time-panel-height') - 10;
      var ctx = canvas.getContext("2d");
      ctx.clearRect(0, 0, canvas.style.width, canvas.style.height);
-}
+}    
 
-var overlay = function() {
-     
+
+function overlay() {
      var canvas = document.getElementById("canvas");
-     canvas.style.width = sessionStorage.getItem('time-panel-width');
-     canvas.style.height = sessionStorage.getItem('time-panel-height') - 10;
      var ctx = canvas.getContext("2d");
 
      var secondsColor = sessionStorage.getItem('seconds-color');
@@ -18,12 +16,13 @@ var overlay = function() {
      var hoursColor = sessionStorage.getItem('hours-color');
      var radius = 12;
 
-     var secondSecondX = (document.getElementById("sec").getBoundingClientRect().width / 6) * (13.3);
-     var firstSecondX = (document.getElementById("sec").getBoundingClientRect().width / 6) * (11);
-     var secondMinuteX = (document.getElementById("min").getBoundingClientRect().width / 6) * (8.5);
-     var firstMinuteX = (document.getElementById("min").getBoundingClientRect().width / 6) * (6.2);
-     var secondHourX = (document.getElementById("hour").getBoundingClientRect().width / 6) * (3.8);
-     var firstHourX = (document.getElementById("hour").getBoundingClientRect().width / 6) * (1.4);
+     var secondHourX = (document.getElementById("hour").getBoundingClientRect().x / 2);
+     var firstHourX = (document.getElementById("hour").getBoundingClientRect().x / 4);
+     var secondMinuteX =  document.getElementById("min").style.left + (canvas.width - document.getElementById("min").style.left) - canvas.width / 2.25;
+     var firstMinuteX = document.getElementById("min").style.left + (canvas.width - document.getElementById("min").style.left) - canvas.width / 1.85;
+     var secondSecondX = document.getElementById("sec").style.left + (canvas.width - document.getElementById("sec").style.left) - canvas.width / 8.5;
+     var firstSecondX = document.getElementById("sec").style.left + (canvas.width - document.getElementById("sec").style.left) - canvas.width / 4.6;
+
 
      /*==================================================
      00:00:0X
@@ -804,7 +803,7 @@ function refreshTime() {
      var s = timeArr[2].slice(0,2);
 
      var refresh = 1000;
-     time = setTimeout('clock()', refresh);
+     time1 = setTimeout('clock()', refresh);
      time = setTimeout('overlay()', refresh);
      
      sessionStorage.setItem('seconds', s);
@@ -830,10 +829,10 @@ function clock() {
                h = 12;
           }
           else {
-               h = date.getHours() % 12;    
+               h = date.getHours() % 12; 
                if (h < 10) {
-                    h = ("0" + h).slice (-2);
-               }
+                    h = "0" + h;
+               }   
           }
      }
      //24 hour format 
@@ -844,14 +843,14 @@ function clock() {
              else {
                h = date.getHours();
                if (h < 10) {
-                 h = ("0" + h).slice (-2);
-               }
+                    h = "0" + h;
+               }   
              }
      }
-   
+
      document.getElementById("hour").innerText = h;
      document.getElementById("min").innerText = m;
      document.getElementById("sec").innerText = s;
      refreshTime();
-   }
+}
 

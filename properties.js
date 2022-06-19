@@ -36,9 +36,9 @@ window.wallpaperPropertyListener = {
         sessionStorage.setItem('time-panel-width', document.getElementById("time-panel").style.width);
         sessionStorage.setItem('time-panel-height', document.getElementById("time-panel").style.height);
   
-        document.getElementById("hour").style.letterSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
-        document.getElementById("min").style.letterSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
-        document.getElementById("sec").style.letterSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
+       // document.getElementById("hour").style.wordSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
+       // document.getElementById("min").style.wordSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
+      //  document.getElementById("sec").style.wordSpacing = document.getElementById("time-panel").clientWidth / 15 + "px";
     
         //setting up canvas
         document.getElementById("canvas").style.width = document.getElementById("time-panel").style.width;
@@ -74,8 +74,8 @@ window.wallpaperPropertyListener = {
         else {
           h = date.getHours() % 12;
           if (h < 10) {
-            h = ("0" + h).slice (-2);
-          }
+            h = "0" + h;
+          }   
         }
            
         document.getElementById("hour").innerText =  h;
@@ -90,8 +90,8 @@ window.wallpaperPropertyListener = {
         else {
           h = date.getHours();
           if (h < 10) {
-            h = ("0" + h).slice (-2);
-          }
+            h = "0" + h;
+       }   
         } 
       }
         

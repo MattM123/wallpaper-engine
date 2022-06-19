@@ -18,18 +18,20 @@
                }
                #hour, #min, #sec {
                     font-family: 'dm mono';
-                    font-weight: 1000;                 
+                    font-weight: 1000;   
+                    display: table;
+                    margin-left: auto;
+                    margin-right: auto;  
                }
                #clock {
-                    display: table;
-                    margin: 0 auto;
+                    display: flex;
+                    margin-left: auto;
+                    margin-right: auto;
                }
                #audioCanvas {
                     border-radius: 20px; 
                     background-color: rgba(0, 0, 0, 0.3); 
                     position: absolute;
-                    height: 600px; 
-                    width: 800px;
                }
           </style>
           
@@ -44,10 +46,7 @@
                </span>
           </div>
 
-          
-               <canvas id="audioCanvas"></canvas>
-         
-        
+          <canvas id="audioCanvas"></canvas>
 
           <script>
                // Get the audio canvas once the page has loaded
@@ -56,39 +55,21 @@
                // Get the 2D context of the canvas to draw on it in wallpaperAudioListener
                let audioCanvasCtx = audioCanvas.getContext('2d');
 
-               function flipImage(image, ctx, flipH, flipV) {
-                    var scaleH = flipH ? -1 : 1, // Set horizontal scale to -1 if flip horizontal
-                    scaleV = flipV ? -1 : 1, // Set verical scale to -1 if flip vertical
-                    posX = flipH ? width * -1 : 0, // Set x position to -100% if flip horizontal 
-                    posY = flipV ? height * -1 : 0; // Set y position to -100% if flip vertical
-    
-                    ctx.save(); // Save the current state
-                    ctx.translate(image.width / 2, image.height / 2);
-                    ctx.scale(scaleH, scaleV); // Set scale to flip the image
-                    ctx.drawImage(audioCanvas, posX, posY, width, height); // draw the image
-                    ctx.restore(); // Restore the last saved state
-               };
-
                // Setting internal canvas resolution to user screen resolution
                // (CSS canvas size differs from internal canvas size)
                audioCanvas.height = window.innerHeight;
                audioCanvas.width = window.innerWidth;
 
                //temp canvas to store rotation data
-               var tempCanvas = document.createElement("canvas"),
-               tempCtx = tempCanvas.getContext("2d");
+               var offScreen = document.createElement("canvas"),
+               offScreenCtx = offScreen.getContext("2d");
 
-               tempCanvas.width = audioCanvas.width;
-               tempCanvas.height = audioCanvas.height;
-               tempCtx.drawImage(audioCanvas,0,0,audioCanvas.width,audioCanvas.height);
 
                function wallpaperAudioListener(audioArray) {
                     audioCanvasCtx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
 
                     if (sessionStorage.getItem("audio-orientation") == "left" ||
                          sessionStorage.getItem("audio-orientation") == "right") {
-                         audioCanvasCtx.setTransform();
-                    
 
                          // Render bars along the full height of the canvas
                          var barWidth = Math.round(1.0 / 128.0 * audioCanvas.height);
@@ -114,33 +95,73 @@
                     for (var i = halfCount; i < audioArray.length; i += parseInt(sessionStorage.getItem("bar-amount"))) {
                          // Create an audio bar with its hight depending on the audio volume level
                          // Using audioArray[191 - i] here to inverse the right channel for aesthetics
-                         var height = audioCanvas.height * Math.min(audioArray[191 - i], 1) * sessionStorage.getItem("bar-height");;
+                         var height = audioCanvas.height * Math.min(audioArray[191 - i], 1) * sessionStorage.getItem("bar-height");
                          audioCanvasCtx.fillRect(barWidth * i, audioCanvas.height - height * sessionStorage.getItem("bar-distortion"), barWidth, height);
                     }
 
                     if (sessionStorage.getItem("audio-orientation") == "left") {
-                         //temp canvas to store rotation data
-                         var tempCanvas = document.createElement("canvas"),
-                         tempCtx = tempCanvas.getContext("2d");
 
-                         tempCanvas.width = audioCanvas.width;
-                         tempCanvas.height = audioCanvas.height;
-                         tempCtx.drawImage(audioCanvas, 0, 0, audioCanvas.width, audioCanvas.height);
+                         offScreen.width = audioCanvas.width;
+                         offScreen.height = audioCanvas.height;
+                         offScreenCtx.drawImage(audioCanvas, 0, 0, audioCanvas.width, audioCanvas.height);
 
                          // Now clear the portion to rotate.
                          audioCanvasCtx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
 
                          audioCanvasCtx.save();
                          // Translate (190/2 is half of the box we drew)
-                         audioCanvasCtx.translate(audioCanvas.width / 2, 0);
+                         audioCanvasCtx.translate(audioCanvas.width, 0);
 
                          // Rotate it
-                         audioCanvasCtx.rotate(90 * Math.PI/180);
+                         audioCanvasCtx.rotate(90 * Math.PI / 180);
 
                          // Finally draw the image data from the temp canvas.
                          audioCanvasCtx.translate(audioCanvas.height / 45, -audioCanvas.width / 16);
-                         audioCanvasCtx.width = audioCanvasCtx.width * 10;
-                         audioCanvasCtx.drawImage(tempCanvas, 0, 0, audioCanvas.width, audioCanvas.height * 2, 0, 0, audioCanvas.width, audioCanvas.height * 2);
+                         audioCanvasCtx.drawImage(offScreen, 0, 0, audioCanvas.width, audioCanvas.height * 1.9);
+                         audioCanvasCtx.restore();
+                    }
+
+                    if (sessionStorage.getItem("audio-orientation") == "right") {
+
+                         offScreen.width = audioCanvas.width;
+                         offScreen.height = audioCanvas.height;
+                         offScreenCtx.drawImage(audioCanvas, 0, 0, audioCanvas.width, audioCanvas.height);
+
+                         // Now clear the portion to rotate.
+                         audioCanvasCtx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
+
+                         audioCanvasCtx.save();
+                         // Translate (190/2 is half of the box we drew)
+                         audioCanvasCtx.translate(audioCanvas.width, 0);
+
+                         // Rotate it
+                         audioCanvasCtx.rotate(-90 * Math.PI / 180);
+
+                         // Finally draw the image data from the temp canvas.
+                         audioCanvasCtx.translate(audioCanvas.height - window.innerHeight / 5, -audioCanvas.width - 125);
+                         audioCanvasCtx.drawImage(offScreen, 0, 0, -audioCanvas.width, audioCanvas.height * 1.9);
+                         audioCanvasCtx.restore();
+                    }
+                    
+                    if (sessionStorage.getItem("audio-orientation") == "top") {
+
+                         offScreen.width = audioCanvas.width;
+                         offScreen.height = audioCanvas.height;
+                         offScreenCtx.drawImage(audioCanvas, 0, 0, audioCanvas.width, audioCanvas.height);
+
+                         // Now clear the portion to rotate.
+                         audioCanvasCtx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
+
+                         audioCanvasCtx.save();
+                         // Translate (190/2 is half of the box we drew)
+                         audioCanvasCtx.scale(-1, 1);
+
+                         // Rotate it
+                         audioCanvasCtx.rotate(180 * Math.PI / 180);
+
+                         // Finally draw the image data from the temp canvas.
+                         audioCanvasCtx.translate(audioCanvas.height * 1.78 , -audioCanvas.width);
+                         audioCanvasCtx.drawImage(offScreen, 0, 0, -audioCanvas.width, audioCanvas.height * 1.78);
                          audioCanvasCtx.restore();
                     }
                }
